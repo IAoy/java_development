@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Select;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
+import com.sky.entity.DishFlavor;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 
@@ -47,9 +49,38 @@ public interface DishMapper {
     Dish getDishById(Long id);
 
     /**
-     * 批量删除菜品
+     * 删除菜品
      * @param id
      */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 使用集合一次性删除多个菜品
+     * @param ids
+     */
+    void deleteByIds(List<Long> ids);
+
+    /**
+     * 根据菜品id查询口味
+     * @param id
+     * @return
+     */
+    @Select("select * from dish_flavor where dish_id = #{id}")
+    List<DishFlavor> getFlavorsById(Long id);
+
+    /**
+     * 修改菜品
+     * @param dish
+     */
+    @AutoFill(OperationType.UPDATE)
+    void updateWithFlavor(Dish dish);
+
+    /**
+     * 根据分类ID查询菜品
+     * @param id
+     * @return
+     */
+    @Select("select * from dish where category_id = #{id}")
+    List<DishVO> getDishesByCategoryId(Long id);
 }

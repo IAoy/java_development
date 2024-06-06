@@ -8,4 +8,12 @@
             #{dishId}
         </foreach>
     </select>
+
+    <!-- parameterType = "java.util.List",因为mybatis只需要知道这个是一个列表 -->
+    <insert id = "addSetmealDish" parameterType = "java.util.List">
+        insert into setmeal_dish(setmeal_id,dish_id,name,price,copies) values
+            <foreach collection = "setmealDish" item = "dish" separator = ",">
+                (#{dish.setmealId},#{dish.dishId},#{dish.name},#{dish.price},#{dish.copies})
+            </foreach>
+    </insert>
 </mapper>
