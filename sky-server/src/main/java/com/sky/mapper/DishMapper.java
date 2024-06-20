@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.github.pagehelper.Page;
@@ -77,10 +78,10 @@ public interface DishMapper {
     void updateWithFlavor(Dish dish);
 
     /**
-     * 根据分类ID查询菜品
+     * 根据分类ID查询菜品，其中name可选
      * @param id
+     * @param name
      * @return
      */
-    @Select("select * from dish where category_id = #{id}")
-    List<DishVO> getDishesByCategoryId(Long id);
+    List<DishVO> getDishesByCategoryId(@Param("id") Long id, @Param("name") String name);
 }

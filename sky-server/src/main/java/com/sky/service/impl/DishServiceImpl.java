@@ -135,8 +135,8 @@ public class DishServiceImpl implements DishService{
         }
     }
 
-    public List<DishVO> getDishesByCategoryId(Long id){
-        return dishMapper.getDishesByCategoryId(id);
+    public List<DishVO> getDishesByCategoryId(Long id,String name){
+        return dishMapper.getDishesByCategoryId(id,name);
     }
 
 }

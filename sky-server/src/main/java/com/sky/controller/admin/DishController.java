@@ -116,8 +116,10 @@ public class DishController {
      */
     @GetMapping("/list")
     @ApiOperation("根据分类ID查询菜品")
-    public Result<List<DishVO>> getDishesByCategoryId(Long categoryId){
-        List<DishVO> dishes= dishService.getDishesByCategoryId(categoryId);
+    //这是一个查询参数(Query Params)、Spring框架会尝试自动匹配对应参数名的参数、但为了可读性推荐加上@RequestParam注解
+    public Result<List<DishVO>> getDishesByCategoryId(@RequestParam(required = false) Long categoryId,@RequestParam(required = false) String name){
+        List<DishVO> dishes= dishService.getDishesByCategoryId(categoryId,name);
         return Result.success(dishes);
     }
+
 }

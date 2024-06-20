@@ -52,5 +52,5 @@ public interface DishService {
      * @param id
      * @return
      */
-    public List<DishVO> getDishesByCategoryId(Long id);
+    public List<DishVO> getDishesByCategoryId(Long id,String name);
 }
